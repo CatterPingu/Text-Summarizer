@@ -1,0 +1,7 @@
+artifacts_root: artifacts #all generation is saved in artifacts
+
+data_ingestion: #allows changes here which reflect everywhere
+  root_dir: artifacts/data_ingestion
+  source_URL: https://github.com/CatterPingu/presentations/raw/main/data.zip
+  local_data_file: artifacts/data_ingestion/data.zip
+  unzip_dir: artifacts/data_ingestion
