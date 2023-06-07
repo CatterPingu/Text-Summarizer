@@ -1,82 +1,95 @@
 # End-to-End Text-Summarizer
 
+This repository contains an end-to-end implementation of a Text-Summarizer, which aims to generate concise summaries of input text documents. The summarization process is performed using a pipeline consisting of several components that work together to extract key information and generate a summary.
 
-Workflow
+Please note that the model in this repository has not been trained on my machine as it does not have a GPU :( . Therefore, no evaluation or prediction can be performed. However, all the modules required for the Text-Summarizer have been written completely.
 
-1. Update config.yaml
-2. Update params.yaml
-3. Update entity
-4. Update the configuration manager in src config
-5. Update the components
-6. Update the pipeline
-7. Update the main.py
-8. Update the app.py
+## Workflow
+
+To use this Text-Summarizer, follow the workflow outlined below:
+
+1. Update `config.yaml`: Modify the configuration file to specify any required settings and parameters for the summarization process.
+
+2. Update `params.yaml`: Customize the parameters file to adjust various options and settings specific to your summarization requirements.
+
+3. Update `entity`: Modify the entity file to define the entities or topics of interest for summarization.
+
+4. Update the configuration manager in `src config`: Make any necessary updates to the configuration manager module to ensure it reflects your desired configuration.
+
+5. Update the components: Modify the individual components of the summarization pipeline to tailor the summarization process to your specific needs.
+
+6. Update the pipeline: Customize the pipeline module to define the sequence of steps and components involved in the summarization process.
+
+7. Update `main.py`: Make necessary modifications to the main script file to incorporate any changes made in the previous steps.
+
+8. Update `app.py`: Customize the application script to define the interface or integration points for interacting with the Text-Summarizer.
+
+## AWS-CICD-Deployment-with-Github-Actions
+
+Continuous Integration and Continuous Deployment (CI/CD) with GitHub Actions provides an automated and streamlined approach for deploying your application or project to AWS. It offers several advantages, including improved development efficiency, faster release cycles, and reliable deployment processes.
+
+CI/CD involves the integration of code changes, building the application, running tests, and deploying it to the target environment automatically. GitHub Actions, combined with AWS services, allows you to set up a CI/CD pipeline that automates the entire software delivery process.
 
 
-# AWS-CICD-Deployment-with-Github-Actions
+This section provides instructions for deploying the Text-Summarizer using AWS services and GitHub Actions.
 
-## 1. Login to AWS console.
+1. Login to the AWS console.
 
-## 2. Create IAM user for deployment
+2. Create an IAM user for deployment with the necessary access permissions. Grant the following access:
 
-#with specific access
+   - EC2 access: Allows managing virtual machines.
+   - ECR: Enables saving the Docker image in AWS Elastic Container Registry.
 
-1. EC2 access : It is virtual machine
+   Ensure you note down the access key and secret access key for the IAM user.
 
-2. ECR: Elastic Container registry to save your docker image in aws
+3. Create an ECR repository to store the Docker image. Save the repository URI for later use.
 
+   Example URI: `162741883631.dkr.ecr.eu-north-1.amazonaws.com/text-s`
 
-#Description: About the deployment
-1. Build docker image of the source code
+4. Create an EC2 machine (Ubuntu) for deployment.
 
-2. Push your docker image to ECR
+5. Open the EC2 instance and install Docker:
 
-3. Launch Your EC2 
+   ```shell
+   # Optional updates
+   sudo apt-get update -y
+   sudo apt-get upgrade
 
-4. Pull Your image from ECR in EC2
+   # Install Docker
+   curl -fsSL https://get.docker.com -o get-docker.sh
+   sudo sh get-docker.sh
+   sudo usermod -aG docker ubuntu
+   newgrp docker
+   ```
 
-5. Lauch your docker image in EC2
+6. Configure the EC2 instance as a self-hosted runner:
 
-#Policy:
+   - Go to EC2 instance settings > Actions > Runner > New self-hosted runner.
+   - Choose the operating system and follow the provided commands to configure the runner.
 
-1. AmazonEC2ContainerRegistryFullAccess
+7. Set up GitHub secrets for the repository:
 
-2. AmazonEC2FullAccess
+   - `AWS_ACCESS_KEY_ID`: The access key ID of the IAM user created for deployment.
+   - `AWS_SECRET_ACCESS_KEY`: The secret access key corresponding to the IAM user.
+   - `AWS_REGION`: The AWS region for deployment (e.g., `us-east-1`).
+   - `AWS_ECR_LOGIN_URI`: The ECR login URI, such as `demo>> 566373416292.dkr.ecr.ap-south-1.amazonaws.com`.
+   - `ECR_REPOSITORY_NAME`: The name of the ECR repository for storing the Docker image (e.g., `simple-app`).
 
-## 3. Create ECR repo to store/save docker image
+These instructions will guide you
 
-- Save the URI: 162741883631.dkr.ecr.eu-north-1.amazonaws.com/text-s
-## 4. Create EC2 machine (Ubuntu)
+ through the deployment process using AWS services and GitHub Actions. Adapt the steps as needed for your specific deployment requirements.
 
-## 5. Open EC2 and Install docker in EC2 Machine:
+Feel free to explore the code and adapt it to your specific use cases or requirements. If you have any questions or encounter any issues, please reach out.
 
-#optional
+Certainly! Here's a disclaimer you can include:
 
-sudo apt-get update -y
+## Disclaimer
 
-sudo apt-get upgrade
+Please note that the information and instructions provided in this README are for educational and informational purposes only. The deployment process outlined in the "AWS-CICD-Deployment-with-Github-Actions" section may not cover all possible scenarios or configurations, and it is recommended to refer to official AWS documentation and consult with experienced professionals when implementing a CI/CD pipeline for your specific project.
 
-#required
+Deploying applications and utilizing AWS services involve potential risks and considerations related to security, cost, and compliance. It is essential to thoroughly review and understand the implications of deploying your application on AWS and follow best practices to ensure the security and stability of your infrastructure.
 
-curl -fsSL https://get.docker.com -o get-docker.sh
+Users are solely responsible for their actions and decisions related to the deployment process and usage of AWS services.
 
-sudo sh get-docker.sh
+Always exercise caution and refer to official documentation and expert advice when working with AWS services and implementing CI/CD pipelines.
 
-sudo usermod -aG docker ubuntu
-
-newgrp docker
-## 6. Configure EC2 as self-hosted runner:
-
-setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-## 7. Setup github secrets:
-
-AWS_ACCESS_KEY_ID=
-
-AWS_SECRET_ACCESS_KEY=
-
-AWS_REGION = us-east-1
-
-AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
-
-ECR_REPOSITORY_NAME = simple-app
