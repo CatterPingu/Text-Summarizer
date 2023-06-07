@@ -37,4 +37,4 @@ async def predict_route(text):
     
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000) #Initialising the host and port to run this FastAPI app   
+    uvicorn.run(app, host="0.0.0.0", port=8080) #Initialising the host and port to run this FastAPI app   
