@@ -75,13 +75,9 @@ This section provides instructions for deploying the Text-Summarizer using AWS s
    - `AWS_ECR_LOGIN_URI`: The ECR login URI, such as `demo>> 566373416292.dkr.ecr.ap-south-1.amazonaws.com`.
    - `ECR_REPOSITORY_NAME`: The name of the ECR repository for storing the Docker image (e.g., `simple-app`).
 
-These instructions will guide you
-
- through the deployment process using AWS services and GitHub Actions. Adapt the steps as needed for your specific deployment requirements.
+Adapt the steps as needed for your specific deployment requirements.
 
 Feel free to explore the code and adapt it to your specific use cases or requirements. If you have any questions or encounter any issues, please reach out.
-
-Certainly! Here's a disclaimer you can include:
 
 ## Disclaimer
 
